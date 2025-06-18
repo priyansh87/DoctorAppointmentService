@@ -4,12 +4,17 @@ import connectDB from './db.js';
 import { configDotenv } from 'dotenv';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-
+import cors from 'cors';
 import appointmentRouter from './routes/appointments.routes.js'
 
 configDotenv() ;
 const app = express();
 const PORT = process.env.PORT || 3000;
+app.use(cors({
+    origin: '*', // Or replace * with specific domain like 'https://www.omnidim.io'
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Middleware
 app.use(express.json());
